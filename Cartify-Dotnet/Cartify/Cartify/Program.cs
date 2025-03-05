@@ -1,5 +1,13 @@
 var builder = WebApplication.CreateBuilder(args);
 
+//cors issue
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        { policy.AllowAnyOrigin().AllowAnyOrigin().AllowAnyMethod(); });
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -19,6 +27,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+// use in middlewares
+app.UseCors();
 
 app.MapControllers();
 
