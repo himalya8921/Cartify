@@ -1,5 +1,5 @@
 <div class="login-container">
-    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <form #myForm="ngForm" [formGroup]="signUpForm" (ngSubmit)="onSubmit(myForm.value)">
       <div>
         <label>Email:</label>
         <input type="text" formControlName="email" placeholder="Enter your email" />
@@ -9,21 +9,21 @@
       </div>
       <div>
         <label>Password:</label>
-        <input type="password" formControlName="password" placeholder="Enter your password" minlength="6" maxlength="10"/>
+        <input type="password" formControlName="password" placeholder="Enter your password"/>
         <span class="error" >
           {{passwordValidations}}
         </span>
       </div>
       <div>
         <label>Name:</label>
-        <input type="text" formControlName="name" placeholder="Enter your full name" maxlength="20"/>
+        <input type="text" formControlName="name" placeholder="Enter your full name"/>
         <span class="error" >
           {{nameValidations}}
         </span>
       </div>
       <div>
         <label>Phone Number:</label>
-        <input type="number" formControlName="phoneNumber" placeholder="Enter your Phone Number" minlength="10" maxlength="10"/>
+        <input type="number" formControlName="phoneNumber" placeholder="Enter your Phone Number" />
         <span class="error">
           {{phoneValidation}}
         </span>

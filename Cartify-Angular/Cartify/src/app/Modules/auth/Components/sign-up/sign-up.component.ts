@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { AuthModel } from 'src/app/Models/auth.model';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,8 +15,12 @@ export class SignUpComponent implements OnInit {
   public nameValidations: string;
   public phoneValidation: string;
   public addressValidation: string;
-  constructor(private fb: FormBuilder) {
-   }
+  constructor(private fb: FormBuilder,
+    private _authService : AuthService
+  ) 
+  {
+
+  }
 
   ngOnInit() {
     this.initForm();
@@ -44,8 +50,8 @@ export class SignUpComponent implements OnInit {
     this.signUpForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      name: ['', [Validators.required, Validators.maxLength(20)]],
-      phoneNumber: ['', [Validators.required, Validators.maxLength(10)]],
+      name: ['', [Validators.required]],
+      phoneNumber: ['', [Validators.required]],
       address: ['', [Validators.required]]
     });
   }
@@ -93,13 +99,19 @@ export class SignUpComponent implements OnInit {
       }
     }
   }
-  onSubmit() {
-    // if (this.signUpForm.valid) {
-    //   console.log('Login Data:', this.signUpForm.value);
-    //   alert('Login Successful!');
-    // } else {
-    //   alert('Please fill in all required fields correctly.');
-    // }
+  onSubmit(value : any): void {
+    const authModel : AuthModel = {
+      email: value.email,
+      password: value.password,
+      name: value.name,
+      phoneNumber: value.phoneNumber.toString(),
+      address: value.address
+    }
+    if (this.signUpForm.valid) {
+      this._authService.SignUpUser(authModel);
+    } else {
+      alert('Some Mistake');
+    }
   }
  
 }
