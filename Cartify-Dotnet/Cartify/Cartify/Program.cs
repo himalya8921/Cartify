@@ -1,3 +1,10 @@
+using Cartify.Business.Services;
+using Cartify.Business;
+using Cartify.Data.Entities;
+using Cartify.Data.Repository;
+using Cartify.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 //cors issue
@@ -11,6 +18,15 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
+
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CartifyString")));
+
+builder.Services.AddScoped<RepositoryManager>();
+builder.Services.AddScoped<ServiceManager>();
+
+
 
 // Add services to the container.
 

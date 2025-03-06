@@ -1,4 +1,6 @@
-﻿using Cartify.Data;
+﻿using Cartify.Business.Model;
+using Cartify.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Cartify.Business.Services
 {
@@ -10,6 +12,21 @@ namespace Cartify.Business.Services
         public AuthService(RepositoryManager repositoryManager)
         {
             _repositoryManager = repositoryManager;
+        }
+
+        public async Task<string> SignUp(SignUp model)
+        {
+            var signUpModel = new SignUp();
+            signUpModel.Email = model.Email;
+            signUpModel.Password = model.Password;
+            signUpModel.PhoneNumber = model.PhoneNumber;
+            signUpModel.Name = model.Name;
+            signUpModel.Address = model.Address;
+            var result = await _repositoryManager.AuthRepository.SignUp(model);
+            if (result == "Success")
+                return result;
+            else
+                return "Failed";
         }
     }
 }
