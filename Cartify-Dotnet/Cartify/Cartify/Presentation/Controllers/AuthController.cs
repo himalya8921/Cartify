@@ -10,6 +10,13 @@ namespace Cartify.Presentation.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+
+        private readonly ServiceManager _serviceManager;
+
+        public AuthController(ServiceManager serviceManager)
+        {
+            _serviceManager = serviceManager;
+        }
         [HttpPost("SignUp")]
         public ActionResult SignUp([FromBody] SignUp model)
         {
@@ -17,9 +24,10 @@ namespace Cartify.Presentation.Controllers
             {
                 return BadRequest("Invalid request");
             }
+            else
+            {
 
-            // Log the received data for debugging
-            Console.WriteLine($"Email: {model.Email}, Name: {model.Name}");
+            }
 
             return Ok(new { Message = "User signed up successfully!" });
         }

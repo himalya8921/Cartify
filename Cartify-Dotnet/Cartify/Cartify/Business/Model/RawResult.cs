@@ -1,4 +1,4 @@
-﻿namespace Cartify.Business
+﻿namespace Cartify.Business.Model
 {
     public class RawResult<T>
     {

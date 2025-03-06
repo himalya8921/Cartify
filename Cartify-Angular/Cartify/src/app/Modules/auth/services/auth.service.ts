@@ -50,9 +50,6 @@ export class AuthService {
   // }
 
   SignUpUser(authModel: AuthModel) {
-    console.log("🚀 Sending request to:", this.signUpUrl);
-    console.log("📤 Request Body:", authModel);
-  
     fetch(this.signUpUrl, {
       method: "POST",
       headers: {
@@ -66,8 +63,8 @@ export class AuthService {
         }
         return response.json();
       })
-      .then(data => console.log("✅ Fetch Response:", data))
-      .catch(error => console.error("❌ Fetch Error:", error));
+      .then(data => console.log("Fetch Response:", data))
+      .catch(error => console.error("Fetch Error:", error));
   }
   
   
