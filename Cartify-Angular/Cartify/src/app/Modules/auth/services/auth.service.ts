@@ -35,7 +35,12 @@ export class AuthService {
   //     alert("Sign-up failed: " + error.message);
   //   });
   // }
-  
+
+  // Login(model: LoginModel): Observable<any> {
+  //   return this.http.post(this.url, model)
+  //     .pipe(map(response => response));
+  // }
+
   SignUpUser(authModel: AuthModel) {
     fetch(this.signUpUrl, {
       method: "POST",
@@ -62,6 +67,10 @@ export class AuthService {
       });
   }
   
+  // SignUpUser(model: AuthModel): Observable<any> {
+  //   return this.http.post(this.signUpUrl, model)
+  //     .pipe(map(response => response));
+  // }
   
   // Function to show a notification
   showNotification(title: string, message: string) {

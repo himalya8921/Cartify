@@ -12,10 +12,12 @@ namespace Cartify.Presentation.Controllers
     {
 
         private readonly ServiceManager _serviceManager;
+        private readonly JwtService _jwtService;
 
-        public AuthController(ServiceManager serviceManager)
+        public AuthController(ServiceManager serviceManager, JwtService jwtService)
         {
             _serviceManager = serviceManager;
+            _jwtService = jwtService;
         }
         [HttpPost("SignUp")]
         public async Task<IActionResult> SignUp([FromBody] SignUp model)
