@@ -13,42 +13,18 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  // SignUpUser(authModel: AuthModel) {
-  //   fetch(this.signUpUrl, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify(authModel)
-  //   })
-  //   .then(response => response.json()) 
-  //   .then(data => {
-  //     console.log("Fetch Response:", data);
-  //     if (data === "Success") {
-  //       alert("User signed up successfully!");
-  //     } else {
-  //       throw new Error(data); 
-  //     }
-  //   })
-  //   .catch(error => {
-  //     console.error("Fetch Error:", error);
-  //     alert("Sign-up failed: " + error.message);
-  //   });
-  // }
-
-  // Login(model: LoginModel): Observable<any> {
-  //   return this.http.post(this.url, model)
-  //     .pipe(map(response => response));
-  // }
-
   SignUpUser(authModel: AuthModel) {
+    //console.log("Sending request to API with:", authModel); // Debugging
+
     fetch(this.signUpUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(authModel)
     })
       .then(response => {
-        // Ensure response is JSON before parsing
+        //console.log("Response Status:", response.status); // Debugging
+        //console.log("Response Headers:", response.headers); // Debugging
+
         const contentType = response.headers.get("content-type");
         if (!contentType || !contentType.includes("application/json")) {
           return response.text().then(text => { throw new Error(text); });
@@ -56,17 +32,19 @@ export class AuthService {
         return response.json();
       })
       .then(data => {
-        if (data.message === "Success") {  // ✅ Check `data.message`
+        console.log("Response Data:", data); // Debugging
+        if (data.message === "Success") {
           this.showNotification("✅ Success", "User signed up successfully!");
         } else {
-          this.showNotification("❌ Error", "Sign-up failed: " + data.message); // ✅ Show error message
+          this.showNotification("❌ Error", "Sign-up failed: " + data.message);
         }
       })
       .catch(error => {
+        console.error("Fetch Error:", error); // Debugging
         this.showNotification("❌ Error", "Fetch Error: " + error.message);
       });
-  }
-  
+}
+
   // SignUpUser(model: AuthModel): Observable<any> {
   //   return this.http.post(this.signUpUrl, model)
   //     .pipe(map(response => response));

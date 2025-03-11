@@ -25,7 +25,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<RepositoryManager>();
 builder.Services.AddScoped<ServiceManager>();
-
+builder.Services.AddScoped<JwtService>();
 
 
 // Add services to the container.
