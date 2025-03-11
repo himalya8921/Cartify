@@ -1,6 +1,7 @@
 ﻿using Cartify.Business.Model;
 using Cartify.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Runtime.Intrinsics.X86;
 
 namespace Cartify.Data.Repository
@@ -29,5 +30,18 @@ namespace Cartify.Data.Repository
             await _dbContext.SaveChangesAsync();
             return "Success";
         }
+        public async Task<string> SignIn(SignIn model)
+        {
+            if (model == null || string.IsNullOrWhiteSpace(model.Email) || string.IsNullOrWhiteSpace(model.Password))
+            {
+                return "Invalid Input";
+            }
+
+            var userExists = await _dbContext.Users
+                .AnyAsync(user => user.Email == model.Email && user.Password == model.Password);
+
+            return userExists ? "Success" : "Failed";
+        }
+
     }
 }

@@ -1,18 +1,18 @@
 <div class="login-container">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form #myForm="ngForm" [formGroup]="loginForm" (ngSubmit)="onSubmit(myForm.value)">
       <div>
         <label>Email:</label>
         <input type="email" formControlName="email" placeholder="Enter your email" />
-        <span class="error" *ngIf="email?.invalid && email?.touched">
-          *Valid email is required
+        <span class="error">
+          {{emailValidations}}
         </span>
       </div>
   
       <div>
         <label>Password:</label>
         <input type="password" formControlName="password" placeholder="Enter your password" />
-        <span class="error" *ngIf="password?.invalid && password?.touched">
-          *Password must be at least 6 characters
+        <span class="error">
+          {{passwordValidations}}
         </span>
       </div>
   

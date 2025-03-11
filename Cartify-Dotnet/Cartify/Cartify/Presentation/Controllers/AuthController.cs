@@ -35,6 +35,24 @@ namespace Cartify.Presentation.Controllers
                 return BadRequest(new { message = result }); 
         }
 
+        [HttpPost("SignIn")]
+        public async Task<IActionResult> SignIn([FromBody] SignIn model)
+        {
+            if (model == null)
+            {
+                return BadRequest(new { message = "Invalid request" });
+            }
+
+            var result = await _serviceManager.AuthService.SignIn(model);
+            if(result == "Success")
+            {
+                var token = _jwtService.GenerateToken(model.Email ?? string.Empty);
+                return Ok(new { token });
+            }
+
+            return Unauthorized(new { message = result });
+        }
+
     }
 
 }

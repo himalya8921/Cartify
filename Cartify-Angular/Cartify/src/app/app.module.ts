@@ -5,8 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './Modules/auth/auth.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthInterceptor } from './Modules/auth/auth.interceptor';
 
+export function tokenGetter() {
+  return localStorage.getItem('jwt_token');
+}
 @NgModule({
   declarations: [
     AppComponent
@@ -16,9 +21,18 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     AuthModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:5173"], // Replace with actual API domain if needed
+        disallowedRoutes: ["localhost:5173/api/auth/login"]
+      }
+    })
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
