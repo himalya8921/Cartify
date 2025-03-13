@@ -32,7 +32,7 @@ export class AuthService {
         return response.json();
       })
       .then(data => {
-        console.log("Response Data:", data); // Debugging
+        //console.log("Response Data:", data); // Debugging
         if (data.message === "Success") {
           this.showNotification("✅ Success", "User signed up successfully!");
         } else {
