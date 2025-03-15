@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './Modules/auth/auth.interceptor';
+import { GridModule } from '@progress/kendo-angular-grid';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt_token');
@@ -17,6 +18,7 @@ export function tokenGetter() {
     AppComponent
   ],
   imports: [
+    GridModule,
     BrowserModule,
     AppRoutingModule,
     AuthModule,
