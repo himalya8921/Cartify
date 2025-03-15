@@ -9,13 +9,17 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './Modules/auth/auth.interceptor';
 import { GridModule } from '@progress/kendo-angular-grid';
+import { ComponentNameComponent } from './app/Modules/user-dashboard/component-name.component';
+import { NewComponentComponent } from './app/Modules/user-dashboard/new-component.component';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt_token');
 }
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ComponentNameComponent,
+    NewComponentComponent
   ],
   imports: [
     GridModule,
