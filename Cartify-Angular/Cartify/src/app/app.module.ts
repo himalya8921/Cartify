@@ -8,7 +8,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './Modules/auth/auth.interceptor';
-import { GridModule } from '@progress/kendo-angular-grid';
 import { UserDashboardModule } from './Modules/user-dashboard/user-dashboard.module';
 
 export function tokenGetter() {
@@ -19,7 +18,6 @@ export function tokenGetter() {
     AppComponent
   ],
   imports: [
-    GridModule,
     BrowserModule,
     AppRoutingModule,
     AuthModule,
