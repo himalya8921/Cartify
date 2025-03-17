@@ -62,7 +62,9 @@ export class SignInComponent implements OnInit {
         }
         if (this.loginForm.valid) {
           this._authService.SignInUser(authModel).subscribe(response =>{localStorage.setItem('jwt_token', response.token);
+            localStorage.setItem('role', response.role);
             console.log(response.token);
+            console.log(response.role);
             alert('success');
           }, 
           error => {

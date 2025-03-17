@@ -30,17 +30,22 @@ namespace Cartify.Data.Repository
             await _dbContext.SaveChangesAsync();
             return "Success";
         }
-        public async Task<string> SignIn(SignIn model)
+        public async Task<(string, int)> SignIn(SignIn model)
         {
             if (model == null || string.IsNullOrWhiteSpace(model.Email) || string.IsNullOrWhiteSpace(model.Password))
             {
-                return "Invalid Input";
+                return ("Invalid Input", 2);
             }
 
-            var userExists = await _dbContext.Users
-                .AnyAsync(user => user.Email == model.Email && user.Password == model.Password);
+            var user = await _dbContext.Users
+                .FirstOrDefaultAsync(user => user.Email == model.Email && user.Password == model.Password);
 
-            return userExists ? "Success" : "Failed";
+            if (user == null)
+            {
+                return ("Failed", 2);
+            }
+
+            return ("Success", user.Role);
         }
 
     }

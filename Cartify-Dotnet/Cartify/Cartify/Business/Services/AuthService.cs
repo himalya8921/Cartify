@@ -29,17 +29,18 @@ namespace Cartify.Business.Services
                 return "Failed";
         }
 
-        public async Task<string> SignIn(SignIn model)
+        public async Task<(string, int)> SignIn(SignIn model)
         {
             var signUpModel = new SignUp();
             signUpModel.Email = model.Email;
             signUpModel.Password = model.Password;
             
             var result = await _repositoryManager.AuthRepository.SignIn(model);
-            if (result == "Success")
+            if (result.Item1 == "Success")
+            {
                 return result;
-            else
-                return "Failed";
+            }
+            return ("Failed", 2);
         }
     }
 }
