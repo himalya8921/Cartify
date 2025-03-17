@@ -44,10 +44,10 @@ namespace Cartify.Presentation.Controllers
             }
 
             var result = await _serviceManager.AuthService.SignIn(model);
-            if(result == "Success")
+            if(result.Item1 == "Success")
             {
                 var token = _jwtService.GenerateToken(model.Email ?? string.Empty);
-                return Ok(new { token });
+                return Ok(new { token, role = result.Item2 });
             }
 
             return Unauthorized(new { message = result });
