@@ -1,1 +1,25 @@
 <p>admin works!</p>
+<input type="text" placeholder="Search Product Type..."  (input)="filterData($event.target.value)" />
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Product Name</th>
+      <th>Active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of pagedProductTypes">
+      <td>{{ product.id }}</td>
+      <td>{{ product.productTypeName }}</td>
+      <td>{{ product.isActive ? 'Yes' : 'No' }}</td>
+    </tr>
+  </tbody>
+</table>
+<p>Showing {{ startItem }} - {{ endItem }} of {{ totalItems }} items</p>
+
+<!-- Pagination Controls -->
+<button (click)="prevPage()" [disabled]="currentPage === 0">Previous</button>
+<span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+<button (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">Next</button>
