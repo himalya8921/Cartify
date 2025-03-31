@@ -4,9 +4,21 @@
 <table border="1">
   <thead>
     <tr>
-      <th>ID</th>
+      <!-- <th>ID</th>
       <th>Product Name</th>
-      <th>Active</th>
+      <th>Active</th> -->
+      <th>ID
+        <button (click)="sortAsc('id')">⬆</button>
+        <button (click)="sortDesc('id')">⬇</button>
+      </th>
+      <th>Product Name
+        <button (click)="sortAsc('productTypeName')">⬆</button>
+        <button (click)="sortDesc('productTypeName')">⬇</button>
+      </th>
+      <th>Active
+        <button (click)="sortAsc('isActive')">⬆</button>
+        <button (click)="sortDesc('isActive')">⬇</button>
+      </th>
     </tr>
   </thead>
   <tbody>

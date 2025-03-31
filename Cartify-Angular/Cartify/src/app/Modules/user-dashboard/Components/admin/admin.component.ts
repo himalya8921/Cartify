@@ -48,6 +48,13 @@ export class AdminComponent implements OnInit {
       item.productTypeName.toLowerCase().includes(searchText.toLowerCase())
     );
     console.log(this.filteredProductTypes);
+     // Recalculate total items and total pages
+  this.totalItems = this.filteredProductTypes.length;
+  this.calculateTotalPages();
+
+  // Reset to first page after filtering
+  this.currentPage = 0;
+  this.updatePagedData();
   }
 
   calculateTotalPages() {
@@ -76,4 +83,46 @@ export class AdminComponent implements OnInit {
       this.updatePagedData();
     }
   }
+
+  sortAsc(column: string) {
+    this.filteredProductTypes = [...this.filteredProductTypes].sort((p1, p2) => {
+      let valueA = p1[column];
+      let valueB = p2[column];
+  
+      if (typeof valueA === 'boolean') {
+        valueA = valueA ? 1 : 0;
+        valueB = valueB ? 1 : 0;
+      }
+  
+      if (typeof valueA === 'string') {
+        valueA = valueA.toLowerCase();
+        valueB = valueB.toLowerCase();
+      }
+  
+      return valueA > valueB ? 1 : valueA < valueB ? -1 : 0;
+    });
+  
+    this.currentPage = 0; // Reset to first page
+    this.updatePagedData(); // Update displayed data
+  }
+  
+  sortDesc(column: string) {
+    console.log(column);
+    this.filteredProductTypes = [...this.filteredProductTypes].sort((p1, p2) => {
+      let valueA = p1[column];
+      let valueB = p2[column];
+  
+      if (typeof valueA === 'string') {
+        valueA = valueA.toLowerCase();
+        valueB = valueB.toLowerCase();
+      }
+      
+      return valueA > valueB ? -1 : valueA < valueB ? 1 : 0;
+    });
+  
+    this.currentPage = 0; // Reset to first page
+    this.updatePagedData(); // Update displayed data
+  }
+  
+  
 }
