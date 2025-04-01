@@ -1,5 +1,6 @@
 ﻿using Cartify.Business;
 using Cartify.Business.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cartify.Presentation.Controllers
@@ -13,6 +14,8 @@ namespace Cartify.Presentation.Controllers
         {
             _serviceManager = serviceManager;
         }
+        //[Authorize]
+        [Authorize(Roles = "1")]
         [HttpGet("GetAllProductTypes")]
         public async Task<IActionResult> GetAllProductTypes()
         {

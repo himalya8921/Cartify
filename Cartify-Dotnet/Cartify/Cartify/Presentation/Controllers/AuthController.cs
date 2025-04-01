@@ -46,7 +46,7 @@ namespace Cartify.Presentation.Controllers
             var result = await _serviceManager.AuthService.SignIn(model);
             if(result.Item1 == "Success")
             {
-                var token = _jwtService.GenerateToken(model.Email ?? string.Empty);
+                var token = _jwtService.GenerateToken(model.Email ?? string.Empty, result.Item2);
                 return Ok(new { token, role = result.Item2 });
             }
 
