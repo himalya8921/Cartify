@@ -5,8 +5,15 @@ import { CustomerProductsComponent } from './Components/customer-products/custom
 
 
 const routes: Routes = [
-  {path:'adminProducts',component: AdminProductsComponent},
-    {path:'customerProducts',component: CustomerProductsComponent},
+  {
+    path: 'product',
+    children: [
+      { path: 'admin-Products', component: AdminProductsComponent },
+      { path: 'customer-Products', component: CustomerProductsComponent }
+    ]
+  }
+  // {path:'admin-Products',component: AdminProductsComponent},
+  //   {path:'customer-Products',component: CustomerProductsComponent},
 ];
 
 @NgModule({
