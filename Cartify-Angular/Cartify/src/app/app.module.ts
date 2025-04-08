@@ -11,6 +11,7 @@ import { AuthInterceptor } from './Modules/auth/auth.interceptor';
 import { UserDashboardModule } from './Modules/user-dashboard/user-dashboard.module';
 import { AdminProductsComponent } from './Modules/Product/Components/admin-products/admin-products.component';
 import { CustomerProductsComponent } from './Modules/Product/Components/customer-products/customer-products.component';
+import { ProductModule } from './Modules/Product/product.module';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt_token');
@@ -26,6 +27,7 @@ export function tokenGetter() {
     AppRoutingModule,
     AuthModule,
     UserDashboardModule,
+    ProductModule,
     ReactiveFormsModule,
     HttpClientModule,
     JwtModule.forRoot({
